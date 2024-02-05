@@ -5,11 +5,24 @@
 <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a></p>
 
 <h1>Customers</h1>
+<nav class="navbar navbar-light bg-light">
+  <form class="form-inline">
+    <input id='search-customer' class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <div class="suggestions">
+      <span>
+        <ul>
+        </ul>
+      </div>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
 
 <ul style="column-count: 4">
   {% for customer in customers %}
-  <li><a href="/{{ customer.id }}/">{{ customer.firstName }} {{ customer.lastName }}</a></li>
+  <li><a href="/{{ customer.id }}/">{{ customer.concatName() }}</a></li>
   {% endfor %}
 </ul>
+
+<script src="/static/script.js"></script>
 
 {% endblock %}
