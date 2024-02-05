@@ -38,6 +38,25 @@ class Reservation {
 
     return results.rows.map(row => new Reservation(row));
   }
+
+  //Save reservation
+  async save(){
+    try{ 
+      if (this.id === undefined){
+      const results = await db.query(
+        `INSERT INTO reservations (customer_id, start_at, num_guests, notes) 
+        VALUES ($1, $2, $3, $4)`,
+        [this.customerId, this.numGuests, this.startAt, this.notes]);
+        this.id = results.rows[0].id;
+    } else {
+      await db.query(
+        `UPDATE reservations SET start_at=$1, num_guests=$2, notes=$3  WHERE id=$4`,[this.startAt, this.numGuests, this.notes, this.id])
+    }
+  } catch (err) {
+      throw err
+    }
+   
+  }
 }
 
 
