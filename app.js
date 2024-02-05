@@ -15,7 +15,11 @@ nunjucks.configure("templates", {
   express: app
 });
 
+app.use(express.static('public'));
+
 app.use(routes);
+
+
 
 /** 404 handler */
 
